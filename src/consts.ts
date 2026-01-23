@@ -3,18 +3,15 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "AI & CAREER REALITY",
-  DESCRIPTION: "Forget the hype. We focus on where you stand. A realist's chronicle of career and technology.",
+  DESCRIPTION: "Critical examinations of technological shifts. No hype, no bias—just the hard truths about professional survival in the age of AI.",
   AUTHOR: "mihawben",
 }
 
-
-
-// Blog Page
+// Blog Page - 修改这里
 export const BLOG: Page = {
-  TITLE: "Reality Check",
-  DESCRIPTION: "Uncovering costs, risks, and truths from a layman's perspective.",
+  TITLE: "Analysis", // 页面标题改为 Analysis
+  DESCRIPTION: "In-depth observations on AI and the evolving professional landscape.",
 }
-
 
 // Search Page
 export const SEARCH: Page = {
@@ -22,25 +19,25 @@ export const SEARCH: Page = {
   DESCRIPTION: "Search all articles and insights by keyword.",
 }
 
-// Links
+// Links - 修改这里
 export const LINKS: Links = [
   { 
     TEXT: "Home", 
     HREF: "/", 
   },
   { 
-    TEXT: "Reality Check", 
+    TEXT: "Analysis", // 导航栏名称同步修改
     HREF: "/blog", 
   }
 ]
 
-// Socials
+// Socials (保持原样即可)
 export const SOCIALS: Socials = [
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "wei@example.com", // 建议改为你的邮箱
-    HREF: "mailto:wei@example.com",
+    TEXT: "your-email@example.com", // 记得改成你自己的
+    HREF: "mailto:your-email@example.com",
   },
   { 
     NAME: "Github",

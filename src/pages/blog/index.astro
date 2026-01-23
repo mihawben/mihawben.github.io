@@ -1,46 +1,43 @@
 ---
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
-import TopLayout from "@layouts/TopLayout.astro";
-import BottomLayout from "@layouts/BottomLayout.astro";
-import SearchCollection from "@components/SearchCollection";
-import { BLOG } from "@consts";
+import { SITE, BLOG } from "@consts";
 
 const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-
-const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
-  (a, b) => a.localeCompare(b),
-);
-
-const estimated_initial_size =
-  28 + posts.length * 158 + (posts.length - 1) * 12;
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
-  <TopLayout>
-    <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+  <div class="max-w-screen-md mx-auto px-6 pt-32 pb-20">
+    <header class="mb-16">
+      <h1 class="text-4xl font-serif font-bold text-black dark:text-white mb-4">
         {BLOG.TITLE}
       </h1>
-      <div class="mt-1">
-        {BLOG.DESCRIPTION}
-      </div>
-    </div>
-  </TopLayout>
-  <BottomLayout>
-    <div
-      id="search-collection-wrapper"
-      class="animate"
-      style={{ minHeight: `${estimated_initial_size}px` }}
-    >
-      <SearchCollection
-        client:load
-        entry_name={"posts"}
-        tags={tags}
-        data={posts}
-      />
-    </div>
-  </BottomLayout>
+      <p class="text-neutral-500 font-sans italic">
+        The archive of critical observations.
+      </p>
+    </header>
+
+    <main class="space-y-16">
+      {posts.map(post => (
+        <article class="group">
+          <a href={`/blog/${post.slug}`} class="space-y-3">
+            <div class="flex items-center gap-2 text-[11px] uppercase tracking-widest font-semibold text-neutral-400">
+              <time>{post.data.date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+            </div>
+            <h2 class="text-2xl font-bold font-sans group-hover:text-neutral-500 transition-colors leading-tight">
+              {post.data.title}
+            </h2>
+            <p class="text-neutral-600 dark:text-neutral-400 font-serif line-clamp-3 leading-relaxed">
+              {post.data.summary}
+            </p>
+            <div class="pt-2">
+               <span class="text-xs font-bold border-b border-black dark:border-white pb-0.5 uppercase tracking-tighter">Read Analysis</span>
+            </div>
+          </a>
+        </article>
+      ))}
+    </main>
+  </div>
 </PageLayout>
