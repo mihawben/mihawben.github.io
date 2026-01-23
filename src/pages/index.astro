@@ -3,65 +3,77 @@ import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import { SITE } from "@consts";
 
-// 获取博客文章
 const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5); 
+  .slice(0, 10);
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
-  <div class="container mx-auto px-4 py-12">
-    <section class="space-y-12">
-      
-      <div class="space-y-4">
-        <h1 class="text-4xl font-black tracking-tighter text-black dark:text-white uppercase">
-          {SITE.TITLE}
+  <div class="max-w-screen-md mx-auto px-6 py-12">
+    
+    <section class="border-b border-black/10 dark:border-white/10 pb-12 mb-12">
+      <div class="max-w-2xl">
+        <h1 class="text-5xl md:text-6xl font-serif font-medium tracking-tight mb-4">
+          Stay curious.
         </h1>
-        <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
+        <p class="text-xl text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
           {SITE.DESCRIPTION}
         </p>
       </div>
+    </section>
 
-      <hr class="border-neutral-200 dark:border-neutral-800" />
-
-      <div class="space-y-8">
-        <div class="flex justify-between items-end">
-          <h2 class="text-2xl font-bold italic tracking-tight">Latest Reality Checks</h2>
-          <a href="/blog" class="text-sm underline underline-offset-4 hover:text-black dark:hover:text-white transition-colors">
-            View all posts
-          </a>
-        </div>
-        
-        <ul class="flex flex-col gap-10">
-          {blog.map(post => (
-            <li class="group">
-              <a href={`/blog/${post.slug}`} class="block">
-                <div class="flex flex-col gap-2">
-                  <span class="text-xs font-mono text-neutral-500 uppercase">
-                    {post.data.date.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </span>
-                  <h3 class="text-2xl font-bold group-hover:text-neutral-500 transition-colors">
-                    {post.data.title}
-                  </h3>
-                  <p class="text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed">
-                    {post.data.summary}
-                  </p>
-                  <div class="flex items-center gap-1 text-sm font-bold uppercase tracking-widest pt-2">
-                    <span>Read Analysis</span>
-                    <span class="group-hover:translate-x-1 transition-transform">→</span>
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div class="md:col-span-2 space-y-12">
+        {blog.length > 0 ? (
+          blog.map(post => (
+            <article class="group cursor-pointer">
+              <a href={`/blog/${post.slug}`} class="space-y-2">
+                <div class="flex items-center gap-2 text-xs mb-2">
+                  <span class="font-bold text-neutral-900 dark:text-neutral-100">mihawben</span>
+                  <span class="text-neutral-500">·</span>
+                  <time class="text-neutral-500">
+                    {post.data.date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' })}
+                  </time>
+                </div>
+                
+                <h2 class="text-xl font-bold font-sans group-hover:text-neutral-600 transition-colors leading-tight">
+                  {post.data.title}
+                </h2>
+                
+                <p class="text-neutral-500 font-serif line-clamp-2 leading-snug text-base">
+                  {post.data.summary}
+                </p>
+                
+                <div class="flex items-center justify-between pt-4 text-xs text-neutral-500">
+                  <div class="flex items-center gap-2">
+                    <span class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-full">Reality Check</span>
+                    <span>5 min read</span>
                   </div>
                 </div>
               </a>
-            </li>
-          ))}
-        </ul>
+            </article>
+          ))
+        ) : (
+          <p class="italic text-neutral-500">More stories coming soon...</p>
+        )}
       </div>
 
-    </section>
+      <aside class="hidden md:block space-y-8">
+        <div class="sticky top-24">
+          <h3 class="text-sm font-bold uppercase tracking-wider mb-4">Refining Your Perspective</h3>
+          <div class="flex flex-wrap gap-2">
+            {["AI Strategy", "Career Tech", "Realism", "Analysis"].map(tag => (
+              <span class="text-xs border border-neutral-200 dark:border-neutral-800 px-3 py-1 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black cursor-pointer transition-all">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <footer class="mt-12 pt-8 border-t border-neutral-100 dark:border-neutral-900">
+            <p class="text-[10px] text-neutral-400 uppercase tracking-widest">© 2026 AI & Career Reality</p>
+          </footer>
+        </div>
+      </aside>
+    </main>
   </div>
 </PageLayout>
