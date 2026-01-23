@@ -2,16 +2,12 @@ import type { Site, Page, Links, Socials } from "@types"
 
 // Global
 export const SITE: Site = {
-  TITLE: "AI & Career Reality",
+  TITLE: "AI & CAREER REALITY",
   DESCRIPTION: "Forget the hype. We focus on where you stand. A realist's chronicle of career and technology.",
   AUTHOR: "mihawben",
 }
 
-// Work Page
-export const WORK: Page = {
-  TITLE: "Migration",
-  DESCRIPTION: "Documenting professional shifts in the age of AI.",
-}
+
 
 // Blog Page
 export const BLOG: Page = {
@@ -19,11 +15,6 @@ export const BLOG: Page = {
   DESCRIPTION: "Uncovering costs, risks, and truths from a layman's perspective.",
 }
 
-// Projects Page 
-export const PROJECTS: Page = {
-  TITLE: "Toolbox",
-  DESCRIPTION: "Pragmatic tools and resources that actually work.",
-}
 
 // Search Page
 export const SEARCH: Page = {
@@ -40,15 +31,7 @@ export const LINKS: Links = [
   { 
     TEXT: "Reality Check", 
     HREF: "/blog", 
-  },
-  { 
-    TEXT: "Migration", 
-    HREF: "/work", 
-  },
-  { 
-    TEXT: "Toolbox", 
-    HREF: "/projects", 
-  },
+  }
 ]
 
 // Socials
