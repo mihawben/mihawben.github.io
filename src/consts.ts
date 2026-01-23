@@ -1,38 +1,68 @@
-import type { Site, Metadata, Socials } from "@types";
+import type { Site, Page, Links, Socials } from "@types"
 
+// Global
 export const SITE: Site = {
-  NAME: "AI & Career Reality",
-  EMAIL: "wei@example.com", 
-  NUM_POSTS_ON_HOMEPAGE: 5,
-  NUM_WORKS_ON_HOMEPAGE: 0, 
-  NUM_PROJECTS_ON_HOMEPAGE: 0,
-};
+  TITLE: "AI & Career Reality",
+  DESCRIPTION: "Forget the hype. We focus on where you stand. A realist's chronicle of career and technology.",
+  AUTHOR: "mihawben",
+}
 
-export const HOME: Metadata = {
-  TITLE: "Home",
-  // 对应：不讨论“风口”，只讨论“你站不站得住”。
-  DESCRIPTION: "Forget the hype. We focus on where you stand. A realist's chronicle in the age of technology.",
-};
+// Work Page
+export const WORK: Page = {
+  TITLE: "Migration",
+  DESCRIPTION: "Documenting professional shifts in the age of AI.",
+}
 
-export const BLOG: Metadata = {
+// Blog Page
+export const BLOG: Page = {
   TITLE: "Reality Check",
-  // 对应：普通人视角下的成本、风险与真相。
-  DESCRIPTION: "Uncovering the costs, risks, and truths from a layman's perspective.",
-};
+  DESCRIPTION: "Uncovering costs, risks, and truths from a layman's perspective.",
+}
 
-export const WORK: Metadata = {
-  TITLE: "Case Studies",
-  DESCRIPTION: "Practical attempts and real-world results.",
-};
-
-export const PROJECTS: Metadata = {
+// Projects Page 
+export const PROJECTS: Page = {
   TITLE: "Toolbox",
-  DESCRIPTION: "Tools that actually work in the real world.",
-};
+  DESCRIPTION: "Pragmatic tools and resources that actually work.",
+}
 
+// Search Page
+export const SEARCH: Page = {
+  TITLE: "Search",
+  DESCRIPTION: "Search all articles and insights by keyword.",
+}
+
+// Links
+export const LINKS: Links = [
+  { 
+    TEXT: "Home", 
+    HREF: "/", 
+  },
+  { 
+    TEXT: "Reality Check", 
+    HREF: "/blog", 
+  },
+  { 
+    TEXT: "Migration", 
+    HREF: "/work", 
+  },
+  { 
+    TEXT: "Toolbox", 
+    HREF: "/projects", 
+  },
+]
+
+// Socials
 export const SOCIALS: Socials = [
   { 
-    NAME: "github", 
-    HREF: "https://github.com/mihawben" 
+    NAME: "Email",
+    ICON: "email", 
+    TEXT: "wei@example.com", // 建议改为你的邮箱
+    HREF: "mailto:wei@example.com",
+  },
+  { 
+    NAME: "Github",
+    ICON: "github",
+    TEXT: "mihawben",
+    HREF: "https://github.com/mihawben"
   }
-];
+]
