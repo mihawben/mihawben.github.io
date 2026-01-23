@@ -12,13 +12,13 @@ const blog = (await getCollection("blog"))
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
   <div class="max-w-screen-md mx-auto px-6 py-12">
     
-    <section class="border-b border-black/10 dark:border-white/10 pb-12 mb-12">
+    <section class="border-b border-black/10 dark:border-white/10 pb-16 mb-12">
       <div class="max-w-2xl">
-        <h1 class="text-5xl md:text-6xl font-serif font-medium tracking-tight mb-4">
-          Stay curious.
+        <h1 class="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6 leading-[1.1] text-black dark:text-white">
+          Decoding the intersection of <span class="italic text-neutral-500 font-medium">intelligence</span> and <span class="italic text-neutral-500 font-medium">livelihood</span>.
         </h1>
-        <p class="text-xl text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
-          {SITE.DESCRIPTION}
+        <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
+          Critical examinations of technological shifts. No hype, no bias—just the hard truths about professional survival in the age of AI.
         </p>
       </div>
     </section>
@@ -27,50 +27,53 @@ const blog = (await getCollection("blog"))
       <div class="md:col-span-2 space-y-12">
         {blog.length > 0 ? (
           blog.map(post => (
-            <article class="group cursor-pointer">
-              <a href={`/blog/${post.slug}`} class="space-y-2">
-                <div class="flex items-center gap-2 text-xs mb-2">
-                  <span class="font-bold text-neutral-900 dark:text-neutral-100">mihawben</span>
-                  <span class="text-neutral-500">·</span>
+            <article class="group">
+              <a href={`/blog/${post.slug}`} class="space-y-3">
+                <div class="flex items-center gap-2 text-[11px] uppercase tracking-wider font-medium">
+                  <span class="text-black dark:text-white">mihawben</span>
+                  <span class="text-neutral-300">/</span>
                   <time class="text-neutral-500">
-                    {post.data.date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' })}
+                    {post.data.date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })}
                   </time>
                 </div>
                 
-                <h2 class="text-xl font-bold font-sans group-hover:text-neutral-600 transition-colors leading-tight">
+                <h2 class="text-2xl font-bold font-sans group-hover:text-neutral-500 transition-colors leading-tight">
                   {post.data.title}
                 </h2>
                 
-                <p class="text-neutral-500 font-serif line-clamp-2 leading-snug text-base">
+                <p class="text-neutral-600 dark:text-neutral-400 font-serif line-clamp-3 leading-relaxed text-base">
                   {post.data.summary}
                 </p>
                 
-                <div class="flex items-center justify-between pt-4 text-xs text-neutral-500">
-                  <div class="flex items-center gap-2">
-                    <span class="bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-full">Reality Check</span>
-                    <span>5 min read</span>
-                  </div>
+                <div class="flex items-center gap-4 pt-2 text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                  <span class="border border-neutral-200 dark:border-neutral-800 px-2 py-0.5">Analysis</span>
+                  <span>5 min read</span>
                 </div>
               </a>
             </article>
           ))
         ) : (
-          <p class="italic text-neutral-500">More stories coming soon...</p>
+          <p class="italic text-neutral-500 font-serif">The archive is currently silent.</p>
         )}
       </div>
 
-      <aside class="hidden md:block space-y-8">
-        <div class="sticky top-24">
-          <h3 class="text-sm font-bold uppercase tracking-wider mb-4">Refining Your Perspective</h3>
-          <div class="flex flex-wrap gap-2">
-            {["AI Strategy", "Career Tech", "Realism", "Analysis"].map(tag => (
-              <span class="text-xs border border-neutral-200 dark:border-neutral-800 px-3 py-1 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black cursor-pointer transition-all">
-                {tag}
-              </span>
-            ))}
-          </div>
-          <footer class="mt-12 pt-8 border-t border-neutral-100 dark:border-neutral-900">
-            <p class="text-[10px] text-neutral-400 uppercase tracking-widest">© 2026 AI & Career Reality</p>
+      <aside class="hidden md:block">
+        <div class="sticky top-24 space-y-10">
+          <section>
+            <h3 class="text-[11px] font-black uppercase tracking-[0.2em] mb-4 text-black dark:text-white">Focus Areas</h3>
+            <div class="flex flex-wrap gap-2">
+              {["AI Strategy", "Career Risk", "Realism", "Analysis"].map(tag => (
+                <span class="text-[11px] border border-neutral-200 dark:border-neutral-800 px-2.5 py-1 font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black cursor-default transition-all">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </section>
+          
+          <footer class="pt-8 border-t border-neutral-100 dark:border-neutral-900">
+            <p class="text-[10px] text-neutral-400 uppercase tracking-widest leading-loose">
+              © 2026<br/>AI & Career Reality<br/>A Personal Chronicle
+            </p>
           </footer>
         </div>
       </aside>
