@@ -1,16 +1,16 @@
 ---
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard.astro";
-import { SITE, HOME } from "@consts";
+import { SITE, BLOG } from "@consts";
 
+// 获取博客文章
 const blog = (await getCollection("blog"))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+  .slice(0, 5); // 直接写数字，避免 Site 类型报错
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+<PageLayout title="Home" description={SITE.DESCRIPTION}>
   <div class="container mx-auto px-4 py-12">
     <section class="space-y-12">
       
@@ -19,7 +19,7 @@ const blog = (await getCollection("blog"))
           {SITE.TITLE}
         </h1>
         <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">
-          {HOME.DESCRIPTION}
+          {SITE.DESCRIPTION}
         </p>
       </div>
 
@@ -33,10 +33,29 @@ const blog = (await getCollection("blog"))
           </a>
         </div>
         
-        <ul class="flex flex-col gap-4">
+        <ul class="flex flex-col gap-8">
           {blog.map(post => (
-            <li>
-              <ArrowCard entry={post} />
+            <li class="group">
+              <a href={`/blog/${post.slug}`} class="block">
+                <div class="flex flex-col gap-2">
+                  <span class="text-sm text-neutral-500">
+                    {post.data.date.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
+                  <h3 class="text-xl font-bold group-hover:text-neutral-500 transition-colors">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-neutral-600 dark:text-neutral-400 line-clamp-2">
+                    {post.data.description}
+                  </p>
+                  <span class="text-sm font-semibold uppercase tracking-wider underline underline-offset-4">
+                    Read Post →
+                  </span>
+                </div>
+              </a>
             </li>
           ))}
         </ul>
