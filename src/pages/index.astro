@@ -10,68 +10,68 @@ const blog = (await getCollection("blog"))
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
-  <div class="max-w-screen-md mx-auto px-6 py-12">
+  <div class="max-w-screen-md mx-auto px-6 pt-32 pb-20">
     
-    <section class="border-b border-black/10 dark:border-white/10 pb-16 mb-12">
-      <div class="max-w-2xl">
-        <h1 class="text-4xl md:text-5xl font-serif font-bold tracking-tight mb-6 leading-[1.1] text-black dark:text-white">
-          Decoding the intersection of <span class="italic text-neutral-500 font-medium">intelligence</span> and <span class="italic text-neutral-500 font-medium">livelihood</span>.
-        </h1>
-        <p class="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 font-sans leading-relaxed">
-          Critical examinations of technological shifts. No hype, no bias—just the hard truths about professional survival in the age of AI.
-        </p>
-      </div>
-    </section>
+  <section class="border-b border-black/5 dark:border-white/5 pb-16 mb-20">
+  <div class="max-w-2xl">
+    <h1 class="text-3xl md:text-4xl font-sans font-bold tracking-tight mb-6 leading-tight text-black dark:text-white">
+      Decoding the intersection of intelligence and livelihood.
+    </h1>
+    <p class="text-base md:text-lg text-neutral-600 dark:text-neutral-400 font-serif leading-relaxed">
+      Critical examinations of technological shifts. No hype, no bias—just the hard truths about professional survival in the age of AI.
+    </p>
+  </div>
+</section>
 
-    <main class="grid grid-cols-1 md:grid-cols-3 gap-12">
-      <div class="md:col-span-2 space-y-12">
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-16">
+      <div class="md:col-span-2 space-y-16">
         {blog.length > 0 ? (
           blog.map(post => (
             <article class="group">
-              <a href={`/blog/${post.slug}`} class="space-y-3">
-                <div class="flex items-center gap-2 text-[11px] uppercase tracking-wider font-medium">
+              <a href={`/blog/${post.slug}`} class="space-y-4">
+                <div class="flex items-center gap-2 text-[12px] uppercase tracking-[0.15em] font-semibold">
                   <span class="text-black dark:text-white">mihawben</span>
                   <span class="text-neutral-300">/</span>
-                  <time class="text-neutral-500">
+                  <time class="text-neutral-400">
                     {post.data.date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })}
                   </time>
                 </div>
                 
-                <h2 class="text-2xl font-bold font-sans group-hover:text-neutral-500 transition-colors leading-tight">
+                <h2 class="text-2xl font-bold font-sans group-hover:text-neutral-500 transition-colors leading-tight tracking-tight">
                   {post.data.title}
                 </h2>
                 
-                <p class="text-neutral-600 dark:text-neutral-400 font-serif line-clamp-3 leading-relaxed text-base">
+                <p class="text-neutral-600 dark:text-neutral-400 font-serif line-clamp-3 leading-relaxed text-lg">
                   {post.data.summary}
                 </p>
                 
-                <div class="flex items-center gap-4 pt-2 text-[10px] font-bold uppercase tracking-widest text-neutral-500">
-                  <span class="border border-neutral-200 dark:border-neutral-800 px-2 py-0.5">Analysis</span>
+                <div class="flex items-center gap-4 pt-4 text-[11px] font-bold uppercase tracking-widest text-neutral-400">
+                  <span class="border border-neutral-200 dark:border-neutral-800 px-3 py-1 text-neutral-500">Reality Check</span>
                   <span>5 min read</span>
                 </div>
               </a>
             </article>
           ))
         ) : (
-          <p class="italic text-neutral-500 font-serif">The archive is currently silent.</p>
+          <p class="italic text-neutral-400 font-serif text-lg">The archive is currently silent.</p>
         )}
       </div>
 
       <aside class="hidden md:block">
-        <div class="sticky top-24 space-y-10">
+        <div class="sticky top-32 space-y-12">
           <section>
-            <h3 class="text-[11px] font-black uppercase tracking-[0.2em] mb-4 text-black dark:text-white">Focus Areas</h3>
-            <div class="flex flex-wrap gap-2">
+            <h3 class="text-[12px] font-black uppercase tracking-[0.25em] mb-6 text-black dark:text-white">Focus Areas</h3>
+            <div class="flex flex-wrap gap-3">
               {["AI Strategy", "Career Risk", "Realism", "Analysis"].map(tag => (
-                <span class="text-[11px] border border-neutral-200 dark:border-neutral-800 px-2.5 py-1 font-medium hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black cursor-default transition-all">
+                <span class="text-[11px] border border-neutral-200 dark:border-neutral-800 px-3 py-1.5 font-bold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black cursor-default transition-all uppercase tracking-tighter">
                   {tag}
                 </span>
               ))}
             </div>
           </section>
           
-          <footer class="pt-8 border-t border-neutral-100 dark:border-neutral-900">
-            <p class="text-[10px] text-neutral-400 uppercase tracking-widest leading-loose">
+          <footer class="pt-10 border-t border-neutral-100 dark:border-neutral-900">
+            <p class="text-[11px] text-neutral-400 uppercase tracking-[0.2em] leading-[2.2]">
               © 2026<br/>AI & Career Reality<br/>A Personal Chronicle
             </p>
           </footer>
