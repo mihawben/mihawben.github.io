@@ -13,6 +13,15 @@ import { SITE } from "@consts"
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
+  <!-- Google tag (gtag.js) -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-E7G47PL7TK"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-E7G47PL7TK');
+</script>
   <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MP24X276"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
