@@ -1,9 +1,27 @@
 ---
 import Container from "@components/Container.astro"
+// 从父级页面获取 headings（标题数据）
+const { headings } = Astro.props;
 ---
 
 <div class="flex-1 py-5">
   <Container size="md">
+    {headings && headings.length > 0 && (
+      <nav class="mb-12 p-5 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50/30 dark:bg-neutral-900/30">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-neutral-400 mb-4">文章目录</h2>
+        <ul class="space-y-2">
+          {headings.filter(h => h.depth <= 3).map(h => (
+            <li class={`text-sm ${h.depth === 3 ? "ml-4" : ""}`}>
+              <a href={`#${h.slug}`} class="text-neutral-500 hover:text-black dark:hover:text-white transition-colors flex gap-2">
+                <span class="opacity-30">#</span>
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+
     <slot/>
   </Container>
 </div>

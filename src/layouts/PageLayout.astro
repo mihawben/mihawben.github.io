@@ -6,6 +6,9 @@ import Footer from "@components/Footer.astro"
 import Drawer from "@components/Drawer.astro"
 const { title, description } = Astro.props
 import { SITE } from "@consts"
+
+// 【新增逻辑】判断当前页面是否为博客文章页，避免评论框出现在首页或列表页
+const isBlogPost = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog' && Astro.url.pathname !== '/blog/';
 ---
 
 <!doctype html>
@@ -46,6 +49,27 @@ import { SITE } from "@consts"
     <Drawer />
     <main>
       <slot />
+
+      {isBlogPost && (
+        <div class="max-w-screen-md mx-auto px-6 pb-20 mt-20 border-t border-neutral-200 dark:border-neutral-800 pt-10">
+          <script is:inline
+            src="https://giscus.app/client.js"
+            data-repo="mihawben/mihawben.github.io"
+            data-repo-id="R_kgDONvB50w"
+            data-category="Announcements"
+            data-category-id="DIC_kwDONvB5084CmfWv"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="top"
+            data-theme="preferred_color_scheme"
+            data-lang="zh-CN"
+            crossorigin="anonymous"
+            async>
+          </script>
+        </div>
+      )}
     </main>
     <Footer />
 
