@@ -7,7 +7,6 @@ import Drawer from "@components/Drawer.astro"
 const { title, description } = Astro.props
 import { SITE } from "@consts"
 
-// Check if current page is a blog post
 const isBlogPost = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog' && Astro.url.pathname !== '/blog/';
 ---
 
@@ -25,7 +24,6 @@ const isBlogPost = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname
     </script>
 
     <style is:global>
-      /* Progress Bar Styles */
       #progress-bar {
         position: fixed;
         top: 0;
@@ -37,10 +35,14 @@ const isBlogPost = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname
         transition: width 0.1s ease-out;
       }
 
-      /* Giscus Container Customization - Ensure it breathes */
-      .giscus {
+      /* Custom styling to ensure Giscus fills the container properly */
+      .giscus-container {
         width: 100%;
-        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+      .giscus-container giscus-widget {
+        width: 100%;
       }
     </style>
   </head>
@@ -58,12 +60,12 @@ const isBlogPost = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname
       <slot />
 
       {isBlogPost && (
-        /* Increased max-width to screen-lg for a better responsive feel */
-        <div class="max-w-screen-lg mx-auto px-6 pb-20 mt-20 border-t border-neutral-200 dark:border-neutral-800 pt-10">
+        /* Increased max-width to screen-xl (1280px) for a wide, official look */
+        <div class="max-w-screen-xl mx-auto px-6 pb-20 mt-20 border-t border-neutral-200 dark:border-neutral-800 pt-10 giscus-container">
           <script is:inline
             src="https://giscus.app/client.js"
             data-repo="mihawben/mihawben.github.io"
-            data-repo-id="R_kgDOQ-1OBw" 
+            data-repo-id="R_kgDOQ-1OBw"
             data-category="Announcements"
             data-category-id="DIC_kwDOQ-1OB84C1eP3"
             data-mapping="pathname"

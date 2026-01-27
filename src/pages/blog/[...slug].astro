@@ -60,33 +60,14 @@ const readingTime = Math.ceil(numberOfWords / wordsPerMinute);
       )}
 
       <ArticleBottomLayout entry={post} />
-
-      <div class="flex flex-col items-center justify-center my-16 py-10 border-y border-neutral-100 dark:border-neutral-900">
-        <p class="text-xs text-neutral-400 uppercase tracking-[0.3em] mb-6 font-medium">Enjoyed this analysis?</p>
-        
-        <script is:inline src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_707e4d82f7e7f6074211603561334c"></script>
-        
-        <div
-          data-lyket-type="like"
-          data-lyket-id={post.slug}
-          data-lyket-namespace="blog"
-          data-lyket-template="twitter"
-        ></div>
+      
       </div>
-    </div>
   </BottomLayout>
 </PageLayout>
 
 <style is:global>
-  /* 核心优化：确保点击目录跳转后，标题不会被导航栏遮住 */
+  /* 确保跳转标题不被 Header 遮挡 */
   h2, h3, h4 {
     scroll-margin-top: 80px;
-  }
-
-  /* Lyket 按钮样式微调 */
-  .lyket-count {
-    font-family: ui-sans-serif, system-ui, sans-serif !important;
-    font-size: 14px !important;
-    color: #888 !important;
   }
 </style>
