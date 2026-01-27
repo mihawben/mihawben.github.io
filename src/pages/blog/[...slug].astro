@@ -6,29 +6,59 @@ import BottomLayout from "@layouts/BottomLayout.astro"
 import ArticleTopLayout from "@layouts/ArticleTopLayout.astro"
 import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
 
-// Create the static blog pages
+// 创建静态路径
 export async function getStaticPaths() {
-	const posts = await getCollection("blog")
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}))
+  const posts = await getCollection("blog")
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }))
 }
 
-// Get the requested post
+// 获取文章属性
 type Props = CollectionEntry<"blog">
 const post = Astro.props
 const { title, summary } = post.data
+
+// 【功能：获取文章内容和目录标题】
+const { Content, headings } = await post.render();
+
+// 【功能：计算阅读时间】（按每分钟 300 字计算，适配中英文）
+const wordsPerMinute = 300;
+const numberOfWords = post.body.split(/\s+/g).length;
+const readingTime = Math.ceil(numberOfWords / wordsPerMinute);
 ---
 
 <PageLayout title={title} description={summary}>
   <TopLayout>
     <div class="animate">
       <ArticleTopLayout entry={post}/>
+      
+      <div class="flex items-center gap-1.5 text-sm text-neutral-500 dark:text-neutral-400 mt-4 font-sans italic">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>{readingTime} min read</span>
+      </div>
     </div>
   </TopLayout>
+
   <BottomLayout>
     <div class="animate">
+      {headings.length > 0 && (
+        <nav class="mb-12 p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50">
+          <h2 class="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 mb-4">Contents</h2>
+          <ul class="space-y-3">
+            {headings.filter(h => h.depth <= 3).map(h => (
+              <li class={`text-sm transition-all hover:translate-x-1 ${h.depth === 3 ? "ml-4" : ""}`}>
+                <a href={`#${h.slug}`} class="text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white flex items-baseline gap-2">
+                  <span class="text-[10px] text-neutral-300">0{h.depth}</span>
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )}
+
       <ArticleBottomLayout entry={post} />
     </div>
   </BottomLayout>
